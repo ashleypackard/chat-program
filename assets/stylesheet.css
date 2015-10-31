@@ -1,0 +1,41 @@
+html { 
+    height:100%;
+}
+
+body { 
+	font: 13px Helvetica, Arial; 
+    max-height:100%;
+}
+
+#send-message { 
+	position: fixed; 
+	bottom: 0; 
+	width: 50%; 
+	padding-bottom: 10px;
+}
+
+#message-log-container {
+	overflow: auto;
+	padding-bottom: 25px;
+}
+
+#message-log {
+	overflow: hidden;
+}
+
+.user-joined {
+	color: green;
+}
+
+.user-left {
+	color: red;
+}
+
+#client-username {
+	font-size: 2em;
+	color: blue;
+}
+
+.username-container {
+	margin-top: 20px;
+}
