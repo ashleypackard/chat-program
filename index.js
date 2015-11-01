@@ -1,22 +1,47 @@
-var app = require('express')();
+var express = require('express');
+var moment = require('moment');
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var users = {};
+
+app.use('/assets', express.static(__dirname + '/assets'));
 
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
 io.on('connection', function(socket){
-	console.log('a user connected');
-	socket.on('disconnect', function(){
-		console.log('user disconnected');
-	});
-});
+	// on connection we want to show them who's in the chat
+	io.emit('updateUserList', users);
 
-io.on('connection', function(socket){
-	socket.on('chat message', function(msg){
-		console.log('message: ' + msg);
-		io.emit('chat message', msg);
+	socket.on('createUsername', function(username){
+		if(username != '') {
+			socket.username = username;
+			users[username] = username;
+			// add chat message alerting users
+			io.emit('alertUsers', username + " has joined the room", 'user-joined', moment().format('h:mm:ss a'));
+			// add user to users list
+			io.emit('updateUserList', users);
+		}
+	});
+
+	socket.on('sendChatMessage', function(msg){
+		if(msg != '') {
+			io.emit('sendChatMessage', socket.username, msg, moment().format('h:mm:ss a'));
+		}
+	});
+
+	socket.on('disconnect', function(){
+		// only display alert for users with a username
+		if(socket.username != undefined) {
+			socket.broadcast.emit('alertUsers', socket.username + " has left the room", 'user-left', moment().format('h:mm:ss a'));
+		}
+
+		// delete user from users hash and update users list
+		delete users[socket.username];
+		socket.broadcast.emit('updateUserList', users);
+
 	});
 });
 
