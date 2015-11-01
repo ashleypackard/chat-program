@@ -20,7 +20,6 @@ io.on('connection', function(socket){
 			socket.username = username;
 			users[username] = username;
 			// add chat message alerting users
-			console.log(moment().format('h:mm:ss a'));
 			io.emit('alertUsers', username + " has joined the room", 'user-joined', moment().format('h:mm:ss a'));
 			// add user to users list
 			io.emit('updateUserList', users);
@@ -36,7 +35,7 @@ io.on('connection', function(socket){
 	socket.on('disconnect', function(){
 		// only display alert for users with a username
 		if(socket.username != undefined) {
-			socket.broadcast.emit('alertUsers', socket.username + " has left the room", 'user-left');
+			socket.broadcast.emit('alertUsers', socket.username + " has left the room", 'user-left', moment().format('h:mm:ss a'));
 		}
 
 		// delete user from users hash and update users list

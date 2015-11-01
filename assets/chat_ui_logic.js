@@ -31,7 +31,6 @@ function isUnique(username) {
 			return false;
 		}
 	});
-	console.log(found);
 	return (found == true ? false : true);
 }
 
@@ -48,8 +47,14 @@ $('#send-message').submit(function(){
 
 socket.on('sendChatMessage', function(username, msg, timeStamp){
 	$('#message-log').append("<p class='message-post'>"+timeStamp+" - "+"<b>"+username+"</b>" + ": " + msg + "</p>");
+	scrollToBottom();
 });
 
+// scroll to bottom function
+function scrollToBottom(){
+	$('#message-log-container').animate({
+        scrollTop: $('#message-log-container')[0].scrollHeight}, 50);
+}
 // print users in room to the users list
 socket.on('updateUserList', function(users){
 	// update the total number of users online
@@ -74,4 +79,5 @@ socket.on('updateUserList', function(users){
 // print users in room to the users list
 socket.on('alertUsers', function(msg, status, timeStamp){
 	$('#message-log').append("<p class='message-post'>"+timeStamp+" - "+"<b class="+status+">"+msg+"</b> </p>");
+	scrollToBottom();
 });
