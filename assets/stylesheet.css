@@ -3,23 +3,33 @@ html {
 }
 
 body { 
-	font: 13px Helvetica, Arial; 
-    max-height:100%;
+	font-family: Arial, Helvetica, sans-serif;
+  max-height:100%;
+  background-color: #F2E5FF;
+}
+
+#chatroom-name {
+	font-family: Tahoma, Geneva, sans-serif;
 }
 
 #send-message { 
-	position: fixed; 
-	bottom: 0; 
-	width: 50%; 
+	margin-top: 10px;
 	padding-bottom: 10px;
 }
 
-#message-log-container {
+#message-log-container, #online-users-container {
 	overflow: auto;
-	padding-bottom: 25px;
+	border: 1px solid #37006E;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: #fff;
 }
 
-#message-log {
+#message-log-container {
+	margin-top: 15px;
+}
+
+#message-log, #online-users  {
 	overflow: hidden;
 }
 
@@ -38,4 +48,36 @@ body {
 
 .username-container {
 	margin-top: 20px;
+}
+
+#user-title {
+	margin: 0 auto;
+	text-align: center;
+	padding-bottom: 5px;
+	font-weight: bold;
+}
+
+#username-instructions {
+	width: 75%;
+	text-align: center;
+}
+
+.message-post {
+  margin: 0px;
+  padding-left: 10px;
+  padding-bottom: 1px;
+}
+
+.message-post:nth-child(odd) {
+	background-color: #ddd;
+}
+
+#error {
+	color: red;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+
+#username-setup {
+	width: 80%;
 }

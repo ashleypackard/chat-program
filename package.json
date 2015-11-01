@@ -4,6 +4,7 @@
   "description": "my first real time chat program using node.js and socket.io",
   "dependencies": {
     "express": "^4.13.3",
+    "moment": "^2.10.6",
     "socket.io": "^1.3.7"
   }
 }
