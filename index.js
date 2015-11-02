@@ -2,7 +2,7 @@ var express = require('express');
 var moment = require('moment');
 var socketio = require('socket.io');
 
-var app = express().createServer();
+var app = express.createServer();
 
 // development
 // http.listen(3000, function(){
