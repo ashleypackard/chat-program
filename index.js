@@ -14,7 +14,7 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', function(socket){
+io.sockets.on('connection', function(socket){
 	// on connection we want to show them who's in the chat
 	io.emit('updateUserList', users);
 
