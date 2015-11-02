@@ -3,6 +3,7 @@ var moment = require('moment');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+io.set('transports', [ 'polling', 'websocket' ]);
 
 // development
 // http.listen(3000, function(){
