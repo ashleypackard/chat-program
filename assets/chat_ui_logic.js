@@ -1,4 +1,4 @@
-var socket = io().connect('https://packardschatroom.herokuapp.com/');
+var socket = io();
 var loggedOnUsers = {};
 var thisUser;
 
