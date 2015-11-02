@@ -9,11 +9,6 @@ var io = require('socket.io')(http);
 // 	console.log('listening on *:3000');
 // });
 
-io.configure(function () {  
-  io.set("transports", ["xhr-polling"]); 
-  io.set("polling duration", 10); 
-});
-
 // production
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
