@@ -1,10 +1,19 @@
 {
   "name": "socket-chat-program",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "my first real time chat program using node.js and socket.io",
+  "main": "index.js",
   "dependencies": {
     "express": "^4.13.3",
     "moment": "^2.10.6",
     "socket.io": "^1.3.7"
+  },
+  "author": "Ashley Packard",
+  "license": "MIT",
+  "engines": {
+  	"node": "4.2.1"
+  },
+  "scripts": {
+  	"start": "node index.js"
   }
 }
