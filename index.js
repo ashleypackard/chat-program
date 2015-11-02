@@ -2,13 +2,24 @@ var express = require('express');
 var moment = require('moment');
 var socketio = require('socket.io');
 
-var app = express();
+var app = express().createServer();
+
+// development
+// http.listen(3000, function(){
+// 	console.log('listening on *:3000');
+// });
+
+// production
+var port = process.env.PORT || 3000;
+app.listen(port, function() {
+  console.log('Node app is running on port ', port);
+});
+
 var io = socketio.listen(app);
-var http = require('http').Server(app);
+//var http = require('http').Server(app);
 var users = {};
 
 app.use('/assets', express.static(__dirname + '/assets'));
-app.set('port', (process.env.PORT || 5000));
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
@@ -45,14 +56,4 @@ io.sockets.on('connection', function(socket){
 		socket.broadcast.emit('updateUserList', users);
 
 	});
-});
-
-// development
-// http.listen(3000, function(){
-// 	console.log('listening on *:3000');
-// });
-
-// production
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
 });
